@@ -1,73 +1,45 @@
-#include <bits/stdc++.h>
-#define for0(i, n) for (int i = 0; i < (int)(n); ++i)
-#define for1(i, n) for (int i = 1; i <= (int)(n); ++i)
-#define forc(i, l, r) for (int i = (int)(l); i <= (int)(r); ++i)
-#define forr0(i, n) for (int i = (int)(n) - 1; i >= 0; --i)
-#define forr1(i, n) for (int i = (int)(n); i >= 1; --i)
-
-#define pb push_back
-#define fi first
-#define se second
-
-#define all(x) (x).begin(), (x).end()
-#define rall(x) (x).rbegin, (x).rend()
-
-#define tr(c,i) for(__typeof__((c)).begin() i = (c).begin(); i != (c).end(); i++)
-#define present(c,x) ((c).find(x) != (c).end())
-#define cpresent(c,x) (find(all(c),x) != (c).end())
-#define sz(a) int((a).size())
-
+#include<bits/stdc++.h>
 using namespace std;
-
-typedef vector<int> vi;
-typedef vector<vi> vvi;
-typedef pair<int, int> ii;
-typedef vector<ii> vii;
-typedef long long ll;
-typedef vector<ll> vll;
-typedef vector<vll> vvll;
-typedef double ld;
-
-int main() {
-    ios::sync_with_stdio(false);
-    cin.tie(0);
-    int t;
-    cin>>t;
-    while(t--){
-        int n;
-        cin>>n;
-        vector<int>a(n);
-        // vector<pair<int,int>>b(n);
-        vector<int>b(n+1);
-        vector<int>ans(n, 0);
-        for(int i = 0; i<n; i++){
-            cin>>a[i];
-        }
-        for(int i = 0; i<n; i++){
-            if(a[i] == 0) continue;
-            else if(a[i] == 1){
-                ans[i] = 1;
-            }else{
-                b[i+1] = -1;
-                b[max(0,i-a[i]+1)] = 1;
-            }
-        }
-        // cout<<"ea"<<endl;
-        int curr = 0;
-        for(int i = 0; i<n; i++){
-            // cout<<"ea"<<endl;
-            if(ans[i] == 1){
-                cout<<ans[i]<<" ";
-            }else{
-                curr += b[i];
-                // if(b[i] == -1) ans[i] = 1;
-                // cout<<
-                if(curr > 0) ans[i] = 1;
-                cout<<ans[i]<<" ";
-            }
-            
-        }
-        cout<<endl;
-    }
-    return 0;
+const int M=998244353;
+const int N=1000005,E=524288;
+int x[N],y[N],i,mp,c,t,f[N],a[N];
+long long n,m,k;
+long long exgcd(long long a,long long b,long long &x,long long &y)
+{
+	if(b==0)
+	{
+		x=1,y=0;
+		return a;
+	}
+	long long g=exgcd(b,a%b,x,y);
+	long long tmp=x;
+	x=y;
+	y=tmp-a/b*y;
+	return g;
+}
+int main()
+{
+#ifndef ONLINE_JUDGE
+	freopen("a.in","r",stdin);
+	freopen("a.out","w",stdout);
+#endif
+	scanf("%d",&t);
+	while(t--)
+	{
+		scanf("%d",&n);
+		for(i=1;i<=n;++i)
+			f[i]=0;
+		for(i=1;i<=n;++i)
+		{
+			scanf("%d",&a[i]);
+			++f[max(i-a[i]+1,1)];
+			--f[i+1];
+		}
+		for(i=1;i<=n;++i)
+			f[i]+=f[i-1];
+		for(i=1;i<=n;++i)
+			printf("%d ",f[i]?1:0);
+		printf("\n");
+	}
+	
 }

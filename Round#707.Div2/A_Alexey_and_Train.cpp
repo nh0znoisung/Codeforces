@@ -21,7 +21,7 @@ using namespace std;
 
 typedef vector<int> vi;
 typedef vector<vi> vvi;
-typedef pair<int, int> ii;
+typedef pair<int, int> ii;W
 typedef vector<ii> vii;
 typedef long long ll;
 typedef vector<ll> vll;
